@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Valentin Te — Data Analytics Portfolio</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --ink:#1F2420; --paper:#FAF7F2; --sand:#E9DFC9;
+    --navy:#1B2A4A; --clay:#A9502F; --teal:#2E7D6B;
+    --line:rgba(31,36,32,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif; line-height:1.55;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; color:var(--navy);}
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+  a{color:var(--clay);}
+
+  /* NAV */
+  nav{position:sticky; top:0; background:rgba(250,247,242,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); z-index:10;}
+  nav .wrap{display:flex; justify-content:space-between; align-items:center; height:60px;}
+  nav .name{font-family:'Fraunces',serif; font-size:1.05rem; color:var(--navy);}
+  nav ul{list-style:none; display:flex; gap:24px; font-size:0.92rem;}
+  nav a{color:var(--ink); text-decoration:none;}
+  nav a:hover{color:var(--clay);}
+
+  /* HERO */
+  header.hero{padding:76px 0 48px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1fr; align-items:start;}
+  .kicker{font-size:0.95rem; color:var(--teal); font-weight:500; margin-bottom:14px;}
+  .kicker::before{content:"— "; color:var(--clay);}
+  h1.title{font-size:1.85rem; line-height:1.3; max-width:42ch; margin-bottom:18px;}
+  p.lede{font-size:1.1rem; max-width:56ch; color:#40453e; margin-bottom:28px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{display:inline-block; padding:11px 20px; font-size:0.92rem; font-weight:500; text-decoration:none; border-radius:2px;}
+  .btn-primary{background:var(--navy); color:var(--paper);}
+  .btn-primary:hover{background:var(--clay);}
+  .btn-ghost{border:1px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--clay); color:var(--clay);}
+
+  /* IMPACT STRIP */
+  .impact{display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--line);}
+  .impact div{padding:26px 20px; border-left:1px solid var(--line);}
+  .impact div:first-child{border-left:none;}
+  .impact .num{font-family:'IBM Plex Mono', monospace; font-size:1.7rem; color:var(--navy); display:block;}
+  .impact .lbl{font-size:0.82rem; color:#5b6058;}
+
+  /* TRACK TOGGLE */
+  section.track{padding:56px 0; border-bottom:1px solid var(--line);}
+  .track-tabs{display:flex; gap:0; border:1px solid var(--navy); width:max-content; border-radius:2px; overflow:hidden; margin-bottom:24px;}
+  .track-tabs button{font-family:'IBM Plex Sans'; font-size:0.9rem; font-weight:500; padding:9px 18px; border:none; background:transparent; color:var(--navy); cursor:pointer;}
+  .track-tabs button.active{background:var(--navy); color:var(--paper);}
+  .track-panel{display:none; background:#fff; border:1px solid var(--line); padding:28px;}
+  .track-panel.active{display:block;}
+  .track-panel ul{margin-top:14px; padding-left:1.1em;}
+  .track-panel li{margin-bottom:6px; color:#40453e;}
+  .panel-title{font-size:1.3rem; color:var(--navy); margin-bottom:6px;}
+
+  h2.section-h{font-size:1.5rem; margin-bottom:8px;}
+  p.section-sub{color:#5b6058; font-size:0.95rem; margin-bottom:32px; max-width:56ch;}
+
+  /* EXPERIENCE TIMELINE */
+  section.experience{padding:56px 0; border-bottom:1px solid var(--line);}
+  .tl-item{display:grid; grid-template-columns:110px 1fr; gap:20px; padding:22px 0; border-top:1px solid var(--line); position:relative;}
+  .tl-item:first-of-type{border-top:none;}
+  .tl-date{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--teal); padding-top:3px;}
+  .tl-role{font-size:1.05rem; font-weight:600; color:var(--navy);}
+  .tl-org{font-size:0.9rem; color:#5b6058; margin-bottom:8px;}
+  .tl-tags{display:flex; gap:8px; margin-bottom:8px;}
+  .tag{font-size:0.72rem; font-family:'IBM Plex Mono',monospace; padding:2px 8px; border:1px solid var(--line); color:#5b6058;}
+  .tag.meal{border-color:var(--clay); color:var(--clay);}
+  .tag.data{border-color:var(--teal); color:var(--teal);}
+  .tl-item ul{padding-left:1.1em; font-size:0.93rem; color:#333831;}
+  .tl-item li{margin-bottom:4px;}
+  .tl-item li strong{color:var(--navy);}
+  .certificate-link{display:inline-block;margin-left:8px;font-size:0.78rem;color:var(--clay);text-decoration:none;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .certificate-link:hover{border-color:var(--clay);}
+
+  /* PROJECTS */
+  /* FEATURED PROJECT */
+  section.featured{padding:56px 0; border-bottom:1px solid var(--line);}
+  .skill-tags{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 20px;}
+  .skill-tag{font-family:'IBM Plex Mono',monospace; font-size:0.74rem; padding:6px 12px; border:1px solid var(--line); color:#40453e;}
+  .skill-tag.meal{border-color:var(--clay); color:var(--clay);}
+  .skill-tag.data{border-color:var(--teal); color:var(--teal);}
+  .feat-stats{display:flex; gap:10px; flex-wrap:wrap; margin:20px 0 28px;}
+  .stats-label{font-size:0.82rem; font-weight:500; color:var(--navy); margin-bottom:10px;}
+  .context-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0 18px;}
+  .context-box{border:1px solid var(--line); padding:14px 16px;}
+  .context-box.shock{background:var(--sand); border-color:var(--clay);}
+  .context-box.response{background:rgba(46,125,107,0.07); border-color:var(--teal);}
+  .context-box .cb-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--teal); display:block; margin-bottom:6px;}
+  .context-box p{font-size:0.9rem; color:#40453e; margin:0;}
+  .stat-chip{border:1px solid var(--line); padding:8px 14px; font-size:0.85rem;}
+  .stat-chip b{font-family:'IBM Plex Mono',monospace; color:var(--navy); font-weight:500;}
+  .stat-chip.gap{border-color:var(--clay); color:var(--clay);}
+  .pipeline-label{font-size:0.82rem; font-weight:500; color:var(--navy); margin-bottom:12px;}
+  .feat-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start; margin-bottom:24px;}
+  .pipeline{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:0;}
+  .stage-chip{display:block; box-sizing:border-box; width:100%; min-width:0; border:1px solid var(--line); padding:12px 14px; text-decoration:none; color:var(--ink);}
+  .stage-chip:hover{border-color:var(--teal); background:var(--sand);}
+  .stage-chip .s-num{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--teal); display:block; margin-bottom:4px;}
+  .stage-chip .s-label{font-size:0.82rem; font-weight:500;}
+  .stage-chip.meal{border-color:var(--clay);}
+  .stage-chip.meal .s-num{color:var(--clay);}
+  .stage-chip.data{border-color:var(--teal);}
+  .stage-chip.data .s-num{color:var(--teal);}
+  .stage-chip.emphasis{border-width:2px;}
+  button.stage-chip{font:inherit; cursor:pointer; text-align:left; background:none; -webkit-appearance:none;}
+  .feat-ctas{display:flex; gap:12px; flex-wrap:wrap;}
+
+  /* MODAL */
+  .modal-overlay{display:none; position:fixed; inset:0; background:rgba(27,42,74,0.55); z-index:50; align-items:center; justify-content:center; padding:20px;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--paper); border:1px solid var(--navy); max-width:420px; width:100%; padding:28px; position:relative;}
+  .modal-close{position:absolute; top:10px; right:12px; background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--ink); line-height:1;}
+  .modal-kicker{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--teal); margin-bottom:8px;}
+  .modal-box h3{font-size:1.15rem; margin-bottom:10px; padding-right:20px;}
+  .modal-box>p{font-size:0.9rem; color:#5b6058; margin-bottom:16px;}
+  .modal-option{display:block; border:1px solid var(--line); padding:12px 14px; margin-bottom:10px; text-decoration:none; color:var(--ink);}
+  .modal-option:hover{border-color:var(--clay); background:var(--sand);}
+  .mo-label{display:block; font-weight:500; font-size:0.92rem;}
+  .mo-sub{display:block; font-size:0.78rem; color:#5b6058; margin-top:2px;}
+
+  section.projects{padding:56px 0; border-bottom:1px solid var(--line);}
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .proj-card{background:var(--paper); padding:26px; display:block;}
+  .proj-card:hover{background:var(--sand);}
+  .proj-card .p-tool{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--teal); margin-bottom:10px; display:block;}
+  .proj-card h3{font-size:1.1rem; margin-bottom:8px;}
+  .proj-card p{font-size:0.9rem; color:#40453e; margin-bottom:12px;}
+  .proj-card .p-links{display:flex; gap:16px;}
+  .proj-card .p-link{font-size:0.82rem; font-weight:500; color:var(--clay); text-decoration:none;}
+  .proj-card .p-link:hover{text-decoration:underline;}
+
+  /* SKILLS */
+  section.skills{padding:56px 0; border-bottom:1px solid var(--line);}
+  .skill-cols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px;}
+  .skill-col.tools h3{border-color:var(--navy);}
+  .skill-col h3{font-size:0.95rem; text-transform:none; color:var(--navy); margin-bottom:14px; padding-bottom:8px; border-bottom:2px solid var(--clay); display:inline-block;}
+  .skill-col.data h3{border-color:var(--teal);}
+  .skill-col ul{list-style:none;}
+  .skill-col li{font-size:0.92rem; padding:7px 0; border-top:1px solid var(--line); color:#40453e;}
+  .skill-col li:first-of-type{border-top:none;}
+
+  /* EDUCATION */
+  section.education{padding:56px 0; border-bottom:1px solid var(--line);}
+  .edu-row{display:flex; justify-content:space-between; padding:14px 0; font-size:0.93rem;}
+  .edu-row ~ .edu-row{border-top:1px solid var(--line);}
+  .edu-row span{color:#5b6058; font-family:'IBM Plex Mono',monospace; font-size:0.8rem;}
+  a.edu-row{color:var(--ink); text-decoration:none;}
+  a.edu-row:hover{color:var(--clay);}
+  a.edu-row .edu-link-icon{color:var(--clay); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; margin-left:8px;}
+
+  /* FOOTER */
+  footer{padding:56px 0 70px;}
+  footer h2{margin-bottom:10px;}
+  footer p{color:#40453e; max-width:48ch; margin-bottom:24px;}
+  .contact-row{display:flex; gap:22px; flex-wrap:wrap; font-size:0.92rem;}
+  .contact-row a{text-decoration:none; color:var(--navy); border-bottom:1px solid var(--line); padding-bottom:2px;}
+  .contact-row a:hover{color:var(--clay); border-color:var(--clay);}
+
+  @media(max-width:640px){
+    .track-panel{padding:18px;}
+    .pipeline{grid-template-columns:repeat(2,1fr);}
+    .hero-grid{grid-template-columns:1fr; }
+    .impact{grid-template-columns:1fr 1fr;}
+    .impact div:nth-child(3){border-left:none;}
+    h1.title{font-size:1.5rem; max-width:100%;}
+    .proj-grid, .skill-cols, .context-grid, .feat-grid{grid-template-columns:1fr;}
+    .tl-item{grid-template-columns:1fr; gap:6px;}
+    nav ul{gap:14px; font-size:0.82rem;}
+  }
+
+  .lang-btn{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;padding:3px 6px;border:1px solid transparent;background:transparent;color:var(--ink);cursor:pointer;line-height:1.2;}
+  .lang-btn:hover{color:var(--clay);}
+  .lang-btn.active{border-color:var(--navy);color:var(--navy);font-weight:600;}
+  @media(max-width:640px){.lang-switch{margin-left:0!important;} .lang-btn{font-size:0.68rem;}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<div class="name">Valentin Te</div>
+<ul>
+<li><a data-fr="Projets" href="#featured">Projects</a></li>
+<li><a data-fr="Compétences" href="#skills">Skills</a></li>
+<li><a data-fr="Expérience" href="#experience">Experience</a></li>
+<li><a data-fr="Contact" href="#contact">Contact</a></li>
+<li class="lang-switch" style="display:flex;align-items:center;gap:4px;margin-left:6px;"><button aria-label="English" class="lang-btn active" id="lang-en" onclick="setLanguage('en')" type="button">EN</button><span aria-hidden="true" style="color:var(--line)">/</span><button aria-label="Français" class="lang-btn" id="lang-fr" onclick="setLanguage('fr')" type="button">FR</button></li></ul>
+</div></nav>
+<header class="hero"><div class="wrap">
+<div class="hero-grid">
+<div>
+<div class="kicker" data-fr="ANALYSE DE DONNÉES — VISUALISATION — AIDE À LA DÉCISION">DATA ANALYTICS — VISUALIZATION — DECISION SUPPORT</div>
+<h1 class="title" data-fr="Analyse de données et aide à la décision">Data Analytics &amp; Decision Support</h1>
+<p class="lede" data-fr="Dix semaines de stage en analyse de données chez TruBridge Healthcare m’ont permis de renforcer ma capacité à transformer des données brutes en informations utiles à la prise de décision. Je mets cette rigueur analytique au service de chaque jeu de données que je nettoie, de chaque script Python que je développe et de chaque tableau de bord que je conçois avec Excel ou Power BI.">My ten-week data analytics externship at TruBridge Healthcare strengthened my ability to turn raw data into useful decision-making insights. I bring this analytical rigor to every dataset I clean, every Python script I develop, and every dashboard I build with Excel or Power BI.</p>
+<div class="cta-row">
+<a class="btn btn-primary" data-fr="Voir les projets →" href="#featured">See project work →</a>
+</div>
+</div>
+
+</div>
+</div></header>
+<div class="impact"><div class="wrap" style="display:contents">
+<div><span class="num">12</span><span class="lbl" data-fr="outils et matrices de suivi et d’évaluation conçus">M&amp;E tools &amp; matrices designed</span></div>
+<div><span class="num">150+</span><span class="lbl" data-fr="dossiers de bénéficiaires analysés">beneficiary records analyzed</span></div>
+<div><span class="num">3</span><span class="lbl" data-fr="rapports d’évaluation produits">evaluation reports delivered</span></div>
+<div><span class="num">4</span><span class="lbl" data-fr="mécanismes de redevabilité déployés">accountability mechanisms deployed</span></div>
+</div></div>
+<section class="featured" id="featured"><div class="wrap">
+<h2 class="section-h" data-fr="Projet phare">Featured Project</h2>
+<p class="section-sub" data-fr="Un projet analytique de bout en bout, de la préparation des données à l’interprétation des résultats et à la visualisation décisionnelle.">An end-to-end analytics project, from data preparation to interpretation and decision-focused visualization.</p>
+<div class="track-panel active" id="data">
+<h3 class="panel-title" data-fr="Humanitarian Giving Observatory — Portfolio Power BI">Humanitarian Giving Observatory — Power BI Portfolio</h3>
+<p class="pipeline-label" data-fr="Question et précaution" data-fr-html='Comment je l’ai construit — chaque étape renvoie au dépôt ou à l’étude de cas en ligne (&lt;span style="color:var(--teal);"&gt;Données&lt;/span&gt;) :' style="margin-bottom:8px;">Question &amp; caveat</p>
+<div class="context-grid">
+<div class="context-box response">
+<span class="cb-label" data-fr="LA QUESTION">THE QUESTION</span>
+<p data-fr="Dans quelle mesure les financements déclarés couvrent-ils les besoins de financement humanitaire à l’échelle mondiale ? Analyse fondée sur les données publiques du Financial Tracking Service (FTS) d’OCHA, 2000–2026.">How well does reported funding cover global humanitarian funding requirements? Built from public UN OCHA Financial Tracking Service (FTS) data, 2000–2026.</p>
+</div>
+<div class="context-box shock">
+<span class="cb-label" data-fr="LA RÉPONSE" style="color:var(--clay);">THE CAVEAT</span>
+<p data-fr="Il s’agit d’une analyse financière descriptive, et non d’une mesure des besoins ou de la souffrance. 140,37 Md USD de financements déclarés figurent sur des lignes sans montant de besoins renseigné : le ratio principal n’est donc pas un taux calculé ligne par ligne.">This is a descriptive financial analysis, not a measure of need or suffering. USD 140.37bn of reported funding sits on rows with blank requirements, so the headline ratio is not a row-matched rate.</p>
+</div>
+</div>
+<p class="section-sub" data-fr="J’ai conçu l’ensemble de la chaîne analytique : nettoyage avec Power Query, modèle de données en étoile en flocon, six mesures DAX, tableau de bord exécutif et rapport présentant clairement les limites liées à la qualité des données." style="margin:0 0 24px;">I designed the full analytical pipeline: Power Query cleaning, a snowflake data model, six DAX measures, an executive dashboard, and a report that keeps every data-quality limit visible.</p>
+<img alt="Humanitarian Giving Observatory dashboard preview" loading="lazy" onerror="this.style.display='none'" src="https://raw.githubusercontent.com/valentinTe93/humanitarian-giving-observatory/main/docs/dashboard.gif" style="width:100%; height:auto; border:1px solid var(--line); margin-bottom:24px;"/>
+<p class="pipeline-label">How I built it — each stage links to the repository or the live case study (<span style="color:var(--teal);">Data</span>):</p>
+<div class="pipeline">
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/data/fts_requirements_funding_global.csv" rel="noopener" target="_blank"><span class="s-num">01</span><span class="s-label" data-fr="Données sources OCHA FTS">OCHA FTS source data</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/docs/Process_documentation.pdf" rel="noopener" target="_blank"><span class="s-num">02</span><span class="s-label" data-fr="Power Query, modèle et DAX">Power Query, model &amp; DAX</span></a>
+<a class="stage-chip data emphasis" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/Humanitarian_giving_observatory.pbix" rel="noopener" target="_blank"><span class="s-num">03</span><span class="s-label" data-fr="Fichier Power BI (.pbix)">Power BI file (.pbix)</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/Report.pdf" rel="noopener" target="_blank"><span class="s-num">04</span><span class="s-label" data-fr="Rapport analytique (PDF)">Analytical report (PDF)</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/scripts/build_report_figures.py" rel="noopener" target="_blank"><span class="s-num">05</span><span class="s-label" data-fr="Script Python pour les figures">Python figure script</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory#measures-and-interpretation" rel="noopener" target="_blank"><span class="s-num">06</span><span class="s-label" data-fr="Définitions des mesures">Measure definitions</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory#limitations" rel="noopener" target="_blank"><span class="s-num">07</span><span class="s-label" data-fr="Limites">Limitations</span></a>
+<a class="stage-chip data emphasis" href="https://valentinte93.github.io/humanitarian-giving-observatory/" rel="noopener" target="_blank"><span class="s-num">08</span><span class="s-label" data-fr="Étude de cas en ligne →">Live case study →</span></a>
+</div>
+<p class="stats-label" data-fr="Ce que les données montrent — 2000–2026, période alignée :" style="margin-top:28px;">What it showed — 2000–2026, aligned period:</p>
+<div class="feat-stats">
+<div class="stat-chip" data-fr-html="Besoins &lt;b&gt;531,38 Md USD&lt;/b&gt;">Requirements <b>USD 531.38bn</b></div>
+<div class="stat-chip" data-fr-html="Financements déclarés &lt;b&gt;428,92 Md USD&lt;/b&gt;">Reported funding <b>USD 428.92bn</b></div>
+<div class="stat-chip" data-fr-html="Couverture &lt;b&gt;80,72 %&lt;/b&gt;">Coverage <b>80.72%</b></div>
+<div class="stat-chip gap" data-fr-html="Écart de financement &lt;b&gt;102,47 Md USD&lt;/b&gt;">Funding gap <b>USD 102.47bn</b></div>
+<div class="stat-chip" data-fr-html="Fourchette annuelle de couverture &lt;b&gt;52,4 % (2025) – 204,5 % (2005)&lt;/b&gt;">Annual coverage range <b>52.4% (2025) – 204.5% (2005)</b></div>
+<div class="stat-chip" data-fr-html="Plus grands déficits &lt;b&gt;Liban ≈ 16,8 Md $, Syrie ≈ 13,5 Md $, Soudan ≈ 12,3 Md $, RDC ≈ 11,0 Md $&lt;/b&gt;">Largest shortfalls <b>Lebanon ≈$16.8bn, Syria ≈$13.5bn, Sudan ≈$12.3bn, DRC ≈$11.0bn</b></div>
+</div>
+<p class="section-sub" data-fr="Le taux de 80,72 % correspond à la comparaison alignée sur 2000–2026. L’étude de cas en ligne et le tableau de bord Power BI présentent également un contexte de validation à 81,08 % sur l’ensemble des lignes, car une petite part des financements se situe en dehors des années pour lesquelles des besoins sont renseignés. Les deux chiffres sont présentés côte à côte, sans en privilégier un." style="margin:12px 0 0; font-size:0.9em;">The 80.72% figure is the aligned 2000–2026 comparison; the live case study and Power BI dashboard also report an 81.08% all-record validation context, since a small amount of funding falls outside the requirement years. Both are shown side by side rather than picking one.</p>
+<p class="pipeline-label" data-fr="Technologies utilisées" style="margin-top:20px;">Built with</p>
+<div class="skill-tags" style="margin:0 0 24px;">
+<span class="skill-tag data">Power BI</span>
+<span class="skill-tag data">Power Query</span>
+<span class="skill-tag data">DAX</span>
+<span class="skill-tag data" data-fr="Modélisation des données (schéma en flocon)">Data modelling (snowflake)</span>
+<span class="skill-tag data">Python (Matplotlib)</span>
+<span class="skill-tag data" data-fr="Validation de la qualité des données">Data-quality validation</span>
+</div>
+<div class="feat-ctas">
+<a class="btn btn-primary" data-fr="Voir l’étude de cas →" href="https://valentinte93.github.io/humanitarian-giving-observatory/" rel="noopener" target="_blank">View live case study →</a>
+<a class="btn btn-ghost" data-fr="Lire le rapport PDF" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/Report.pdf" rel="noopener" target="_blank">Read the PDF report</a>
+<a class="btn btn-ghost" data-fr="Accéder au projet sur GitHub" href="https://github.com/valentinTe93/humanitarian-giving-observatory" rel="noopener" target="_blank">View full repo</a>
+</div>
+</div>
+</div></section>
+<section class="skills" id="skills"><div class="wrap">
+<h2 class="section-h" data-fr="Compétences">Skills</h2>
+<div class="skill-cols">
+<div class="skill-col meal">
+<h3 data-fr="SERA &amp; données terrain">MEAL &amp; Field Data</h3>
+<ul>
+<li data-fr="KoboToolbox / ODK">KoboToolbox / ODK</li>
+<li data-fr="ActivityInfo">ActivityInfo</li>
+<li data-fr="Conception des indicateurs et cadres logiques">Indicator &amp; logframe design</li>
+<li data-fr="Systèmes de feedback des bénéficiaires (CRM)">Beneficiary feedback (CRM) systems</li>
+<li data-fr="Analyse qualitative (GD, EIC)">Qualitative analysis (FGDs, KIIs)</li>
+</ul>
+</div>
+<div class="skill-col data">
+<h3 data-fr="Données &amp; analytique">Data &amp; Analytics</h3>
+<ul>
+<li data-fr="Power BI (DAX)">Power BI (DAX)</li>
+<li data-fr="Excel (avancé)">Excel (Advanced)</li>
+<li data-fr="SQL / SQLite">SQL / SQLite</li>
+<li>Python</li>
+<li data-fr="Analyse statistique (SPSS)">Statistical analysis (SPSS)</li>
+</ul>
+</div>
+<div class="skill-col tools">
+<h3 data-fr="Langues &amp; outils">Languages &amp; Tools</h3>
+<ul>
+<li data-fr="Français (langue maternelle)">French (Native)</li>
+<li data-fr="Anglais (professionnel, C1)">English (Professional, C1)</li>
+<li data-fr="Git / GitHub">Git / GitHub</li>
+<li data-fr="MS Office (Word, Excel, PowerPoint, Outlook)">MS Office (Word, Excel, PowerPoint, Outlook)</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section class="experience" id="experience"><div class="wrap">
+<h2 class="section-h" data-fr="Expérience">Experience</h2>
+<div class="tl-item">
+<div class="tl-date" data-fr="Juin — 21 sept. 2026">Jun — 21 Sep 2026</div>
+<div>
+<div class="tl-role" data-fr="Stagiaire en analyse de données — TruBridge Healthcare Data Analytics Externship">Data Analytics Intern — TruBridge Healthcare Data Analytics Externship</div>
+<div class="tl-org">TruBridge Healthcare | Mobile, Alabama, États-Unis (Externship) <a class="certificate-link" href="documents/TruBirdge-Extership-Validation-Certificate_80272.pdf" target="_blank" rel="noopener" data-fr="Voir le certificat">View certificate ↗</a></div>
+<div class="skill-tags" style="margin:0 0 8px;"><span class="skill-tag data">Python</span><span class="skill-tag data">Data Visualization</span><span class="skill-tag data">Statistical Research</span></div>
+<ul>
+<li data-fr-html="&lt;strong&gt;Analyse exploratoire des données et identification des tendances :&lt;/strong&gt; Exploitation de données dans le secteur de la santé afin d’examiner les tendances, d’explorer les relations entre variables et de dégager des enseignements pertinents à partir des données, en mobilisant Python et des méthodes d’analyse statistique."><strong>Exploratory Data Analysis &amp; Trend Identification:</strong> Worked with healthcare-sector data to examine trends, explore relationships between variables, and derive relevant insights using Python and statistical analysis methods.</li>
+<li data-fr-html="&lt;strong&gt;Préparation des données et visualisation des résultats :&lt;/strong&gt; Organisation et préparation des données en vue de leur analyse, puis conception de visualisations permettant de mettre en évidence les principaux résultats et de faciliter leur interprétation dans une perspective d’aide à la décision."><strong>Data Preparation &amp; Results Visualization:</strong> Organized and prepared data for analysis, then developed visualizations to highlight key findings and support their interpretation for decision-making.</li>
+</ul>
+</div>
+</div><div class="tl-item">
+<div class="tl-date" data-fr="Mai — Sept. 2025">May — Sep 2025</div>
+<div>
+<div class="tl-role" data-fr="Consultant SERA — Spécialiste du Suivi, de l’Évaluation, de la Redevabilité et de l’Apprentissage">MEAL Consultant — Monitoring, Evaluation, Accountability &amp; Learning Specialist</div>
+<div class="tl-org">Ministère de l'Emploi et de la Protection Sociale — Centre Social de Sassandra, Côte d'Ivoire</div>
+<div class="skill-tags" style="margin:0 0 8px;">
+<span class="skill-tag meal">KoboToolbox</span>
+<span class="skill-tag meal" data-fr="Conception des indicateurs (IPTT)">Indicator Design (IPTT)</span>
+<span class="skill-tag data" data-fr="Excel — avancé (Power Query)">Excel — Advanced (Power Query)</span>
+<span class="skill-tag data" data-fr="Power BI / Tableau de bord">Power BI / Dashboard</span>
+</div>
+<ul>
+<li data-fr-html="&lt;strong&gt;Conception et opérationnalisation du cadre de suivi et d’évaluation :&lt;/strong&gt; Conception et mise à jour de 12 outils et matrices de suivi et d’évaluation, avec standardisation de la collecte des données de terrain au sein du pôle Suivi et Évaluation."><strong>M&amp;E Framework Design &amp; Operationalization:</strong> Designed and updated 12 M&amp;E tools and matrices, standardizing field data collection across the Suivi et Évaluation pool.</li>
+<li data-fr-html="&lt;strong&gt;Gestion, analyse et visualisation des données :&lt;/strong&gt; Supervision de la collecte, du contrôle qualité et de l’analyse de plus de 150 dossiers de bénéficiaires, avec création de tableaux de bord permettant à la direction de disposer d’informations fiables et actualisées."><strong>Data Management, Analytics &amp; Visualization:</strong> Supervised collection, quality control and analysis of 150+ beneficiary records, building dashboards to keep leadership informed with reliable, up-to-date evidence.</li>
+<li data-fr-html="&lt;strong&gt;Redevabilité envers les communautés et engagement des parties prenantes :&lt;/strong&gt; Déploiement et renforcement de 4 mécanismes de feedback et de gestion des plaintes, afin d’améliorer la redevabilité envers les parties prenantes et les communautés."><strong>Community Accountability &amp; Stakeholder Engagement:</strong> Deployed and strengthened 4 community feedback and complaint mechanisms, improving accountability to stakeholders and communities.</li>
+<li data-fr-html="&lt;strong&gt;Capitalisation et gestion des connaissances :&lt;/strong&gt; Rédaction de 3 rapports d’évaluation et de notes de bonnes pratiques, documentant les principaux enseignements et recommandations à l’intention de la direction du centre."><strong>Capitalization &amp; Knowledge Management:</strong> Authored 3 evaluation reports and best-practice briefs, documenting key learnings and recommendations for centre leadership.</li>
+<li data-fr-html="&lt;strong&gt;Renforcement des capacités et prise de décision fondée sur les données :&lt;/strong&gt; Formation et accompagnement de 5 membres de l’équipe et collaborateurs sur l’analyse des données et la prise de décision fondée sur les éléments probants."><strong>Capacity Building &amp; Data-Driven Decision-Making:</strong> Trained and coached 5 team members and collaborators on data analysis and evidence-based decision-making.</li>
+</ul>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-date">2019 — 2024</div>
+<div>
+<div class="tl-role" data-fr="Ingénieur logiciel indépendant (freelance / consultant)">Independent Software Engineer (Freelance/Consultant)</div>
+<div class="tl-org" data-fr="Indépendant — À distance">Self-employed — Remote</div>
+<div class="skill-tags" style="margin:0 0 8px;">
+<span class="skill-tag data">JavaScript</span>
+<span class="skill-tag data">Python</span>
+<span class="skill-tag data">Flutter</span>
+<span class="skill-tag data">SQL</span>
+</div>
+<ul>
+<li data-fr-html="&lt;strong&gt;Développement d’applications full-stack :&lt;/strong&gt; Conception, développement et déploiement d’applications web et mobiles multiplateformes pour des clients internationaux à distance, avec Python, JavaScript, SQL et Flutter, en pilotant l’ensemble du cycle de développement logiciel."><strong>Full-Stack Application Development:</strong> Designed, developed, and deployed cross-platform web and mobile applications for remote international clients using Python, JavaScript, SQL, and Flutter, managing the software development lifecycle end-to-end.</li>
+<li data-fr-html="&lt;strong&gt;Analyse des données marketing et optimisation de la performance :&lt;/strong&gt; Analyse de la performance du marketing digital et des campagnes pour des clients de conseil, à l’aide de pipelines de données personnalisés pour évaluer les canaux d’acquisition et orienter la stratégie produit."><strong>Marketing Data Analytics &amp; Performance Optimization:</strong> Conducted digital marketing performance and campaign analytics for consulting clients, leveraging custom data pipelines to evaluate user acquisition channels and drive product strategy.</li>
+</ul>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-date">2015 — 2018</div>
+<div>
+<div class="tl-role" data-fr="Assistant chef de projet — Initiative de kits scolaires personnalisés">Assistant Project Manager — Personalized School Kits Initiative</div>
+<div class="tl-org">Jeune Équipe SARL — Abidjan, Côte d'Ivoire</div>
+<div class="skill-tags" style="margin:0 0 8px;">
+<span class="skill-tag data">Excel — Advanced</span>
+</div>
+<ul>
+<li data-fr-html="&lt;strong&gt;Logistique opérationnelle et exécution de la chaîne d’approvisionnement :&lt;/strong&gt; Coordination de bout en bout de la fabrication, de la production personnalisée et de la distribution terrain de kits éducatifs personnalisés auprès d’institutions partenaires à Abidjan, avec une réduction significative des coûts unitaires opérationnels."><strong>Operational Logistics &amp; Supply Chain Execution:</strong> Coordinated the end-to-end manufacturing, custom production, and field distribution of personalized educational kits to partner institutions across Abidjan, significantly cutting operational unit costs.</li>
+<li data-fr-html="&lt;strong&gt;Analyse avancée des données et optimisation du chiffre d’affaires :&lt;/strong&gt; Utilisation de modèles de données Excel avancés et d’analyses de la demande, renforcés par une formation en analyse de données, pour évaluer la vitesse des ventes, réorienter la production vers les gammes les plus performantes et contribuer au triplement du chiffre d’affaires de l’entreprise."><strong>Advanced Data Analytics &amp; Revenue Optimization:</strong> Utilized Advanced Excel data models and product-demand analytics — sharpened through a concurrent data analysis course — to evaluate sales velocity, shifting production strategy toward top-performing lines and helping triple overall company revenue.</li>
+<li data-fr-html="&lt;strong&gt;Gestion des parties prenantes et traduction des besoins :&lt;/strong&gt; Échanges directs avec les directeurs d’école et parties prenantes administratives afin d’identifier les contraintes opérationnelles et de traduire les besoins du terrain en livrables adaptés."><strong>Stakeholder Management &amp; Need Translation:</strong> Interfaced directly with school directors and administrative stakeholders to capture operational constraints and translate field requirements into tailored product deliverables.</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section class="education"><div class="wrap">
+<h2 class="section-h" data-fr="Formation &amp; certifications">Education &amp; certifications</h2>
+<div class="edu-row"><div>Licence en Sciences de Gestion — Université de l'Atlantique, Abidjan</div><span>2014</span></div>
+<a class="edu-row" href="https://valentinTe93.github.io/documents/MEAL_Essentials_Certificate.pdf" rel="noopener" target="_blank"><div>MEAL Essentials — Cornerstone OnDemand Foundation / DisasterReady.org<span class="edu-link-icon" data-fr="VOIR ↗">VIEW ↗</span></div><span>2026</span></a>
+<a class="edu-row" href="https://valentinTe93.github.io/documents/Applied_AI_for_Social_Good_Certificate.pdf" rel="noopener" target="_blank"><div>Applied AI for Social Good — PoliSync / Globethics / Fondation de Caux / Microsoft Elevate<span class="edu-link-icon" data-fr="VOIR ↗">VIEW ↗</span></div><span>2026</span></a>
+<a class="edu-row" href="https://valentinTe93.github.io/documents/AI_Fluency_for_Nonprofits_Certificate.pdf" rel="noopener" target="_blank"><div>AI Fluency for Nonprofits — Anthropic / GivingTuesday<span class="edu-link-icon" data-fr="VOIR ↗">VIEW ↗</span></div><span>2026</span></a>
+<a class="edu-row" href="https://valentinTe93.github.io/documents/AI_Fluency_Framework_Foundations_Certificate.pdf" rel="noopener" target="_blank"><div>AI Fluency: Framework &amp; Foundations — Anthropic<span class="edu-link-icon" data-fr="VOIR ↗">VIEW ↗</span></div><span>2026</span></a>
+<a class="edu-row" href="https://valentinTe93.github.io/documents/Intro_to_Data_for_Decision_Makers_Certificate.pdf" rel="noopener" target="_blank"><div>Introduction to Data for Decision Makers — BCG (Forage)<span class="edu-link-icon" data-fr="VOIR ↗">VIEW ↗</span></div><span>2026</span></a>
+<a class="edu-row" href="https://valentinTe93.github.io/documents/Data_Visualisation_Tata_Certificate.pdf" rel="noopener" target="_blank"><div>Data Visualisation: Empowering Business with Effective Insights — Tata (Forage)<span class="edu-link-icon" data-fr="VOIR ↗">VIEW ↗</span></div><span>2026</span></a>
+<div class="edu-row"><div>MEAL DPro — PM4NGOs</div><span data-fr="En cours">In progress</span></div>
+</div></section>
+<footer id="contact"><div class="wrap">
+<h2 data-fr="Échangeons">Let's talk</h2>
+<p data-fr="Ouvert aux opportunités en analyse de données. Basé à Abidjan — ouvert au télétravail et à la mobilité.">Open to data analytics opportunities. Based in Abidjan — open to remote work and relocation.</p>
+<div class="contact-row">
+<a href="mailto:Valentin-Te@outlook.com">Valentin-Te@outlook.com</a>
+<a href="tel:+2250508673522">+225 05 08 67 35 22</a>
+<a href="https://www.linkedin.com/in/valentinte/" rel="noopener" target="_blank">LinkedIn</a>
+<a href="https://github.com/valentinTe93" rel="noopener" target="_blank">GitHub</a>
+<a id="cv-link" data-fr="Télécharger le CV" href="https://valentinTe93.github.io/documents/Valentin_Te_CV_EN_final.pdf">Download CV</a>
+</div>
+</div></footer>
+<script>
+const originalHTML=new WeakMap();
+function rememberOriginals(){document.querySelectorAll('[data-fr],[data-fr-html]').forEach(el=>originalHTML.set(el,el.innerHTML));}
+function setLanguage(lang){
+ document.documentElement.lang=lang;
+ document.querySelectorAll('[data-fr],[data-fr-html]').forEach(el=>{if(lang==='fr'){if(el.hasAttribute('data-fr-html'))el.innerHTML=el.getAttribute('data-fr-html');else el.textContent=el.getAttribute('data-fr');}else if(originalHTML.has(el))el.innerHTML=originalHTML.get(el);});
+ const fr=lang==='fr';document.getElementById('lang-fr').classList.toggle('active',fr);document.getElementById('lang-en').classList.toggle('active',!fr);
+ document.title=fr?'Valentin Te — Portfolio Analyse de Données':'Valentin Te — Data Analytics Portfolio';
+ const cv=document.getElementById('cv-link');if(cv)cv.href=lang==='fr'?'https://valentinTe93.github.io/documents/Valentin_Te_CV_FR_final.pdf':'https://valentinTe93.github.io/documents/Valentin_Te_CV_EN_final.pdf';
+ localStorage.setItem('portfolioLanguage',lang);
+}
+rememberOriginals();setLanguage(localStorage.getItem('portfolioLanguage')||'fr');
+</script>
+</body>
+</html>

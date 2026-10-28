@@ -53,7 +53,7 @@
   .impact{display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--line);}
   .impact div{padding:26px 20px; border-left:1px solid var(--line);}
   .impact div:first-child{border-left:none;}
-  .impact .num{font-family:'IBM Plex Mono', monospace; font-size:1.7rem; color:var(--navy); display:block;}
+  .impact .num{font-family:'IBM Plex Sans',sans-serif; font-size:1.02rem; line-height:1.35; font-weight:600; color:var(--navy); display:block; min-height:2.75em;}
   .impact .lbl{font-size:0.82rem; color:#5b6058;}
 
   /* TRACK TOGGLE */
@@ -213,17 +213,17 @@
 </div>
 </div></header>
 <div class="impact"><div class="wrap" style="display:contents">
-<div><span class="num">12</span><span class="lbl" data-fr="outils et matrices de suivi et d’évaluation conçus">M&amp;E tools &amp; matrices designed</span></div>
-<div><span class="num">150+</span><span class="lbl" data-fr="dossiers de bénéficiaires analysés">beneficiary records analyzed</span></div>
-<div><span class="num">3</span><span class="lbl" data-fr="rapports d’évaluation produits">evaluation reports delivered</span></div>
-<div><span class="num">4</span><span class="lbl" data-fr="mécanismes de redevabilité déployés">accountability mechanisms deployed</span></div>
+<div><span class="num" data-fr="Exploration des données">Data exploration</span><span class="lbl" data-fr="Profilage et compréhension des jeux de données">Profiling and understanding datasets</span></div>
+<div><span class="num" data-fr="Nettoyage et préparation">Data cleaning &amp; preparation</span><span class="lbl" data-fr="Qualité, cohérence et structuration des données">Data quality, consistency and structure</span></div>
+<div><span class="num" data-fr="Analyse et interprétation">Analysis &amp; interpretation</span><span class="lbl" data-fr="Tendances, comparaisons et indicateurs">Trends, comparisons and indicators</span></div>
+<div><span class="num" data-fr="Visualisation des données">Data visualization</span><span class="lbl" data-fr="Tableaux de bord et communication des résultats">Dashboards and communicating findings</span></div>
 </div></div>
 <section class="featured" id="featured"><div class="wrap">
 <h2 class="section-h" data-fr="Projet phare">Featured Project</h2>
 <p class="section-sub" data-fr="Un projet analytique de bout en bout, de la préparation des données à l’interprétation des résultats et à la visualisation décisionnelle.">An end-to-end analytics project, from data preparation to interpretation and decision-focused visualization.</p>
 <div class="track-panel active" id="data">
 <h3 class="panel-title" data-fr="Humanitarian Giving Observatory — Portfolio Power BI">Humanitarian Giving Observatory — Power BI Portfolio</h3>
-<p class="pipeline-label" data-fr="Question et précaution" data-fr-html='Comment je l’ai construit — chaque étape renvoie au dépôt ou à l’étude de cas en ligne (&lt;span style="color:var(--teal);"&gt;Données&lt;/span&gt;) :' style="margin-bottom:8px;">Question &amp; caveat</p>
+<p class="pipeline-label" data-fr="Question et précaution" style="margin-bottom:8px;">Question &amp; caveat</p>
 <div class="context-grid">
 <div class="context-box response">
 <span class="cb-label" data-fr="LA QUESTION">THE QUESTION</span>
@@ -236,7 +236,7 @@
 </div>
 <p class="section-sub" data-fr="J’ai conçu l’ensemble de la chaîne analytique : nettoyage avec Power Query, modèle de données en étoile en flocon, six mesures DAX, tableau de bord exécutif et rapport présentant clairement les limites liées à la qualité des données." style="margin:0 0 24px;">I designed the full analytical pipeline: Power Query cleaning, a snowflake data model, six DAX measures, an executive dashboard, and a report that keeps every data-quality limit visible.</p>
 <img alt="Humanitarian Giving Observatory dashboard preview" loading="lazy" onerror="this.style.display='none'" src="https://raw.githubusercontent.com/valentinTe93/humanitarian-giving-observatory/main/docs/dashboard.gif" style="width:100%; height:auto; border:1px solid var(--line); margin-bottom:24px;"/>
-<p class="pipeline-label">How I built it — each stage links to the repository or the live case study (<span style="color:var(--teal);">Data</span>):</p>
+<p class="pipeline-label" data-fr="Comment j’ai conçu ce projet — explorez chaque étape à travers le dépôt GitHub et l’étude de cas interactive (Données).">How I built it — each stage links to the repository or the live case study (<span style="color:var(--teal);">Data</span>):</p>
 <div class="pipeline">
 <a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/data/fts_requirements_funding_global.csv" rel="noopener" target="_blank"><span class="s-num">01</span><span class="s-label" data-fr="Données sources OCHA FTS">OCHA FTS source data</span></a>
 <a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/docs/Process_documentation.pdf" rel="noopener" target="_blank"><span class="s-num">02</span><span class="s-label" data-fr="Power Query, modèle et DAX">Power Query, model &amp; DAX</span></a>

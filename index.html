@@ -407,7 +407,7 @@
 <a href="tel:+2250508673522">+225 05 08 67 35 22</a>
 <a href="https://www.linkedin.com/in/valentinte/" rel="noopener" target="_blank">LinkedIn</a>
 <a href="https://github.com/valentinTe93" rel="noopener" target="_blank">GitHub</a>
-<a id="cv-link" data-fr="Télécharger le CV" href="https://valentinTe93.github.io/documents/Valentin_Te_CV_EN_final.pdf">Download CV</a>
+<a id="cv-link" data-fr="Télécharger le CV" href="documents/Valentin_Te_CV_EN.pdf">Download CV</a>
 </div>
 </div></footer>
 <script>
@@ -418,7 +418,7 @@ function setLanguage(lang){
  document.querySelectorAll('[data-fr],[data-fr-html]').forEach(el=>{if(lang==='fr'){if(el.hasAttribute('data-fr-html'))el.innerHTML=el.getAttribute('data-fr-html');else el.textContent=el.getAttribute('data-fr');}else if(originalHTML.has(el))el.innerHTML=originalHTML.get(el);});
  const fr=lang==='fr';document.getElementById('lang-fr').classList.toggle('active',fr);document.getElementById('lang-en').classList.toggle('active',!fr);
  document.title=fr?'Valentin Te — Portfolio Analyse de Données':'Valentin Te — Data Analytics Portfolio';
- const cv=document.getElementById('cv-link');if(cv)cv.href=lang==='fr'?'https://valentinTe93.github.io/documents/Valentin_Te_CV_FR_final.pdf':'https://valentinTe93.github.io/documents/Valentin_Te_CV_EN_final.pdf';
+ const cv=document.getElementById('cv-link');if(cv)cv.href=lang==='fr'?'documents/Valentin_Te_CV_FR.pdf':'documents/Valentin_Te_CV_EN.pdf';
  localStorage.setItem('portfolioLanguage',lang);
 }
 rememberOriginals();setLanguage(localStorage.getItem('portfolioLanguage')||'fr');

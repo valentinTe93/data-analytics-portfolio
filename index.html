@@ -62,6 +62,10 @@
   .track-tabs{display:flex; gap:0; border:1px solid var(--navy); width:max-content; border-radius:2px; overflow:hidden; margin-bottom:24px;}
   .track-tabs button{font-family:'IBM Plex Sans'; font-size:0.9rem; font-weight:500; padding:9px 18px; border:none; background:transparent; color:var(--navy); cursor:pointer;}
   .track-tabs button.active{background:var(--navy); color:var(--paper);}
+  .track-tabs button:focus-visible{outline:2px solid var(--clay); outline-offset:-3px; position:relative; z-index:1;}
+  .track-panel[role="tabpanel"]:focus-visible{box-shadow:0 0 0 2px rgba(46,125,107,0.55);}
+  .project-preview-label{font-family:'IBM Plex Mono',monospace; font-size:0.74rem; color:var(--teal); letter-spacing:0.03em; margin:18px 0 8px;}
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
   .track-panel{display:none; background:#fff; border:1px solid var(--line); padding:28px;}
   .track-panel.active{display:block;}
   .track-panel ul{margin-top:14px; padding-left:1.1em;}
@@ -188,6 +192,7 @@
   .lang-btn:hover{color:var(--clay);}
   .lang-btn.active{border-color:var(--navy);color:var(--navy);font-weight:600;}
   @media(max-width:640px){.lang-switch{margin-left:0!important;} .lang-btn{font-size:0.68rem;}}
+  @media(max-width:480px){nav .wrap{height:auto;min-height:60px;flex-wrap:wrap;justify-content:center;gap:4px;padding:8px 14px;}nav .name{width:100%;text-align:center;}nav ul{width:100%;justify-content:center;gap:10px;flex-wrap:wrap;font-size:0.76rem;}}
 </style>
 </head>
 <body>
@@ -234,7 +239,12 @@
 <section class="featured" id="featured"><div class="wrap">
 <h2 class="section-h" data-fr="Projet phare">Featured Project</h2>
 <p class="section-sub" data-fr="Un projet analytique de bout en bout, de la préparation des données à l’interprétation des résultats et à la visualisation décisionnelle.">An end-to-end analytics project, from data preparation to interpretation and decision-focused visualization.</p>
-<div class="track-panel active" id="data">
+<span class="sr-only" id="project-tabs-label" data-fr="Version du projet">Project implementation</span>
+<div class="track-tabs project-tabs" role="tablist" aria-labelledby="project-tabs-label">
+<button type="button" class="active" id="tab-powerbi" role="tab" aria-selected="true" aria-controls="panel-powerbi" tabindex="0" data-project-tab data-fr="Power BI">Power BI</button>
+<button type="button" id="tab-sql-pandas" role="tab" aria-selected="false" aria-controls="panel-sql-pandas" tabindex="-1" data-project-tab data-fr="SQL + pandas">SQL + pandas</button>
+</div>
+<div class="track-panel active" id="panel-powerbi" role="tabpanel" aria-labelledby="tab-powerbi" aria-hidden="false" tabindex="0">
 <h3 class="panel-title" data-fr="Humanitarian Giving Observatory — Portfolio Power BI">Humanitarian Giving Observatory — Power BI Portfolio</h3>
 <p class="pipeline-label" data-fr="Question et précaution" style="margin-bottom:8px;">Question &amp; caveat</p>
 <div class="context-grid">
@@ -248,6 +258,7 @@
 </div>
 </div>
 <p class="section-sub" data-fr="J’ai conçu l’ensemble de la chaîne analytique : nettoyage avec Power Query, modèle de données en étoile en flocon, six mesures DAX, tableau de bord exécutif et rapport présentant clairement les limites liées à la qualité des données." style="margin:0 0 24px;">I designed the full analytical pipeline: Power Query cleaning, a snowflake data model, six DAX measures, an executive dashboard, and a report that keeps every data-quality limit visible.</p>
+<p class="project-preview-label" data-fr="Aperçu du tableau de bord Power BI · GIF">Power BI dashboard preview · GIF</p>
 <img alt="Humanitarian Giving Observatory dashboard preview" loading="lazy" onerror="this.style.display='none'" src="https://raw.githubusercontent.com/valentinTe93/humanitarian-giving-observatory/main/docs/dashboard.gif" style="width:100%; height:auto; border:1px solid var(--line); margin-bottom:24px;"/>
 <p class="pipeline-label" data-fr="Comment j’ai conçu ce projet — explorez chaque étape à travers le dépôt GitHub et l’étude de cas interactive (Données).">How I built it — each stage links to the repository or the live case study (<span style="color:var(--teal);">Data</span>):</p>
 <div class="pipeline">
@@ -283,6 +294,55 @@
 <a class="btn btn-primary" data-fr="Voir l’étude de cas →" href="https://valentinte93.github.io/humanitarian-giving-observatory/" rel="noopener" target="_blank">View live case study →</a>
 <a class="btn btn-ghost" data-fr="Lire le rapport PDF" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/Report.pdf" rel="noopener" target="_blank">Read the PDF report</a>
 <a class="btn btn-ghost" data-fr="Accéder au projet sur GitHub" href="https://github.com/valentinTe93/humanitarian-giving-observatory" rel="noopener" target="_blank">View full repo</a>
+</div>
+</div>
+<div class="track-panel" id="panel-sql-pandas" role="tabpanel" aria-labelledby="tab-sql-pandas" aria-hidden="true" tabindex="0">
+<h3 class="panel-title" data-fr="Humanitarian Giving Observatory — SQL + pandas">Humanitarian Giving Observatory — SQL + pandas</h3>
+<p class="pipeline-label" data-fr="Question et précaution" style="margin-bottom:8px;">Question &amp; caveat</p>
+<div class="context-grid">
+<div class="context-box response">
+<span class="cb-label" data-fr="LA QUESTION">THE QUESTION</span>
+<p data-fr="Dans quelle mesure les financements déclarés couvrent-ils les besoins de financement humanitaire à l’échelle mondiale ? Analyse fondée sur les données publiques du Financial Tracking Service (FTS) d’OCHA, 2000–2026.">How well does reported funding cover global humanitarian funding requirements? Built from public UN OCHA Financial Tracking Service (FTS) data, 2000–2026.</p>
+</div>
+<div class="context-box shock">
+<span class="cb-label" data-fr="LA RÉPONSE" style="color:var(--clay);">THE CAVEAT</span>
+<p data-fr="Il s’agit d’une analyse financière descriptive, et non d’une mesure des besoins ou de la souffrance. 140,37 Md USD de financements déclarés figurent sur des lignes sans montant de besoins renseigné : le ratio principal n’est donc pas un taux calculé ligne par ligne.">This is a descriptive financial analysis, not a measure of need or suffering. USD 140.37bn of reported funding sits on rows with blank requirements, so the headline ratio is not a row-matched rate.</p>
+</div>
+</div>
+<p class="section-sub" data-fr="J’ai reproduit l’analyse avec DuckDB SQL pour préparer les tables, nettoyer les données, contrôler les valeurs manquantes, joindre et agréger les sources, puis pandas et Matplotlib pour valider et visualiser les résultats." style="margin:0 0 18px;">I recreated the analysis with DuckDB SQL for staging, type cleaning, data-quality checks, joins, aggregations and window-function rankings, then used pandas and Matplotlib to validate and visualize the results.</p>
+<p class="project-preview-label" data-fr="Aperçu du notebook SQL + pandas · GIF">SQL + pandas notebook walkthrough · GIF</p>
+<img alt="Animated preview of the SQL and pandas notebook, including query code and chart outputs" loading="lazy" src="assets/humanitarian-sql-pandas-preview.gif" style="width:100%; height:auto; border:1px solid var(--line); margin-bottom:24px;"/>
+<p class="pipeline-label" data-fr="Comment j’ai construit cette version — chaque étape renvoie aux données ou au notebook :">How I built this version — each stage links to the data or notebook:</p>
+<div class="pipeline">
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/main/data/fts_requirements_funding_global.csv" rel="noopener" target="_blank"><span class="s-num">01</span><span class="s-label" data-fr="Données sources OCHA FTS">OCHA FTS source CSVs</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">02</span><span class="s-label" data-fr="Chargement et nettoyage avec DuckDB">Load and clean with DuckDB</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">03</span><span class="s-label" data-fr="Audit des types et valeurs manquantes">Type and missingness audit</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">04</span><span class="s-label" data-fr="KPI et agrégations SQL">SQL KPIs and aggregations</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">05</span><span class="s-label" data-fr="Jointures, CASE et classement">Joins, CASE and ranking</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">06</span><span class="s-label" data-fr="Validation avec pandas">Validation with pandas</span></a>
+<a class="stage-chip data" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">07</span><span class="s-label" data-fr="Graphiques Matplotlib">Matplotlib charts</span></a>
+<a class="stage-chip data emphasis" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank"><span class="s-num">08</span><span class="s-label" data-fr="Notebook Google Colab →">Google Colab notebook →</span></a>
+</div>
+<p class="stats-label" data-fr="Résultats SQL validés — période alignée 2000–2026 :" style="margin-top:28px;">Validated SQL results — aligned period 2000–2026:</p>
+<div class="feat-stats">
+<div class="stat-chip" data-fr-html="Besoins &lt;b&gt;531,38 Md USD&lt;/b&gt;">Requirements <b>USD 531.38bn</b></div>
+<div class="stat-chip" data-fr-html="Financements déclarés &lt;b&gt;428,92 Md USD&lt;/b&gt;">Reported funding <b>USD 428.92bn</b></div>
+<div class="stat-chip" data-fr-html="Couverture &lt;b&gt;80,72 %&lt;/b&gt;">Coverage <b>80.72%</b></div>
+<div class="stat-chip gap" data-fr-html="Écart de financement &lt;b&gt;102,47 Md USD&lt;/b&gt;">Funding gap <b>USD 102.47bn</b></div>
+</div>
+<p class="section-sub" data-fr="Le notebook vérifie ces totaux alignés par rapport au projet Power BI. La couverture de 80,72 % concerne la période alignée ; 81,08 % est le contexte de validation sur l’ensemble des lignes. Ces mesures ne sont pas des taux calculés ligne par ligne." style="margin:12px 0 0; font-size:0.9em;">The notebook asserts these aligned totals against the Power BI project. The 80.72% coverage is for the aligned period; 81.08% is the all-record validation context. Neither is a row-matched rate.</p>
+<p class="pipeline-label" data-fr="Technologies utilisées" style="margin-top:20px;">Built with</p>
+<div class="skill-tags" style="margin:0 0 24px;">
+<span class="skill-tag data">DuckDB SQL</span>
+<span class="skill-tag data" data-fr="Jointures SQL et fonctions de fenêtre">SQL joins &amp; window functions</span>
+<span class="skill-tag data">Python / pandas</span>
+<span class="skill-tag data">Matplotlib</span>
+<span class="skill-tag data">Google Colab</span>
+</div>
+<div class="feat-ctas">
+<a class="btn btn-primary" data-fr="Voir le notebook sur GitHub" href="https://github.com/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank">View notebook on GitHub</a>
+<a class="btn btn-ghost" data-fr="Ouvrir dans Google Colab" href="https://colab.research.google.com/github/valentinTe93/humanitarian-giving-observatory/blob/add-sql-pandas-colab/notebooks/humanitarian_giving_sql_pandas_colab.ipynb" rel="noopener" target="_blank">Open in Google Colab</a>
+<a class="btn btn-ghost" data-fr="Voir le dépôt complet" href="https://github.com/valentinTe93/humanitarian-giving-observatory/tree/add-sql-pandas-colab" rel="noopener" target="_blank">View feature branch</a>
 </div>
 </div>
 </div></section>
@@ -421,6 +481,35 @@ function setLanguage(lang){
  const cv=document.getElementById('cv-link');if(cv)cv.href=lang==='fr'?'documents/Valentin_Te_CV_FR.pdf':'documents/Valentin_Te_CV_EN.pdf';
  localStorage.setItem('portfolioLanguage',lang);
 }
+function initProjectTabs(){
+ const tabs=[...document.querySelectorAll('[data-project-tab]')];
+ const select=tab=>{
+  tabs.forEach(item=>{
+   const active=item===tab;
+   item.classList.toggle('active',active);
+   item.setAttribute('aria-selected',String(active));
+   item.tabIndex=active?0:-1;
+   const panel=document.getElementById(item.getAttribute('aria-controls'));
+   panel.classList.toggle('active',active);
+   panel.setAttribute('aria-hidden',String(!active));
+  });
+ };
+ tabs.forEach((tab,index)=>{
+  tab.addEventListener('click',()=>select(tab));
+  tab.addEventListener('keydown',event=>{
+   let nextIndex=index;
+   if(event.key==='ArrowRight')nextIndex=(index+1)%tabs.length;
+   else if(event.key==='ArrowLeft')nextIndex=(index-1+tabs.length)%tabs.length;
+   else if(event.key==='Home')nextIndex=0;
+   else if(event.key==='End')nextIndex=tabs.length-1;
+   else return;
+   event.preventDefault();
+   tabs[nextIndex].focus();
+   select(tabs[nextIndex]);
+  });
+ });
+}
+initProjectTabs();
 rememberOriginals();setLanguage(localStorage.getItem('portfolioLanguage')||'fr');
 </script>
 </body>
